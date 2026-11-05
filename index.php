@@ -24,6 +24,9 @@ if ($reingreso_contrasena === '') {
 if ($contrasena !== '' && $reingreso_contrasena !== '' && $contrasena !== $reingreso_contrasena) {
     $errores[] = 'Las contraseñas no coinciden.';
 }
+if ($contrasena === '' || !preg_match('/^[0-9]{7,8}$/', $contrasena)) {
+    $errores[] = 'La contraseña debe tener mínimo 8 números.';
+}
 
 if (empty($errores)) {
     try {
@@ -31,7 +34,7 @@ if (empty($errores)) {
         $stmt = $conexion->prepare($sql);
         $stmt->execute([
             'usuario' => $usuario,
-             'contrasena' => $contrasena,
+            'contrasena' => $contrasena,
             'reingreso_contrasena' => $reingreso_contrasena,
         ]);
             $mensaje = 'Usuario registrado correctamente.';
@@ -83,19 +86,7 @@ function escapar(string $valor): string {
     <?php endif; ?>
 
     <!-- Formulario HTML -->
-    <form action="index.php" method="POST">
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" value="<?= escapar($usuario) ?>" maxlength="80" required>
-
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
-
-        <label for="reingreso_contrasena">Reingresar Contraseña:</label>
-        <input type="password" id="reingreso_contrasena" name="reingreso_contrasena" required>
-
-        <button type="submit">Ingresar</button>
-        <button type="botton"><a href=""></a>Registrarse</button>
-    </form>
+    c
 
 </body>
 </html>
